@@ -8,6 +8,7 @@ import (
 )
 
 type URLIsPresent struct {
+	Object  string
 	Name    string
 	Field   string
 	Message string
@@ -20,7 +21,7 @@ func (v *URLIsPresent) IsValid(errors *validate.Errors) {
 		if v.Message == "" {
 			v.Message = fmt.Sprintf("%s url is empty", v.Name)
 		}
-		errors.Add(GenerateKey(v.Name), v.Message)
+		errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 	}
 	parsedUrl, err := url.ParseRequestURI(v.Field)
 	if err != nil {
@@ -28,13 +29,13 @@ func (v *URLIsPresent) IsValid(errors *validate.Errors) {
 			v.Message = fmt.Sprintf("%s does not match url format. Err: %s", v.Name,
 				err)
 		}
-		errors.Add(GenerateKey(v.Name), v.Message)
+		errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 	} else {
 		if parsedUrl.Scheme != "" && parsedUrl.Scheme != "http" && parsedUrl.Scheme != "https" {
 			if v.Message == "" {
 				v.Message = fmt.Sprintf("%s invalid url scheme", v.Name)
 			}
-			errors.Add(GenerateKey(v.Name), v.Message)
+			errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 		}
 	}
 }

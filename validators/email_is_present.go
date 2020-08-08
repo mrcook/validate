@@ -15,6 +15,7 @@ func init() {
 }
 
 type EmailIsPresent struct {
+	Object  string
 	Name    string
 	Field   string
 	Message string
@@ -26,13 +27,14 @@ func (v *EmailIsPresent) IsValid(errors *validate.Errors) {
 		if v.Message == "" {
 			v.Message = fmt.Sprintf("%s does not match the email format.", v.Name)
 		}
-		errors.Add(GenerateKey(v.Name), v.Message)
+		errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 	}
 }
 
 // EmailLike checks that email has two parts (username and domain separated by @)
 // Also it check that domain have domain zone (don`t check that zone is valid)
 type EmailLike struct {
+	Object  string
 	Name    string
 	Field   string
 	Message string
@@ -53,7 +55,7 @@ func (v *EmailLike) IsValid(errors *validate.Errors) {
 			if v.Message == "" {
 				v.Message = fmt.Sprintf("%s does not match the email format (email domain).", v.Name)
 			}
-			errors.Add(GenerateKey(v.Name), v.Message)
+			errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 		}
 	}
 }

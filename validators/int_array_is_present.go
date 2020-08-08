@@ -7,6 +7,7 @@ import (
 )
 
 type IntArrayIsPresent struct {
+	Object  string
 	Name    string
 	Field   []int
 	Message string
@@ -23,5 +24,5 @@ func (v *IntArrayIsPresent) IsValid(errors *validate.Errors) {
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be empty.", v.Name))
+	errors.Add(GenerateObjectKey(v.Object, v.Name), fmt.Sprintf("%s can not be empty.", v.Name))
 }

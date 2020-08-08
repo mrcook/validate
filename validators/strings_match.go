@@ -8,6 +8,7 @@ import (
 )
 
 type StringsMatch struct {
+	Object  string
 	Name    string
 	Field   string
 	Field2  string
@@ -20,6 +21,6 @@ func (v *StringsMatch) IsValid(errors *validate.Errors) {
 		if v.Message == "" {
 			v.Message = fmt.Sprintf("%s does not equal %s.", v.Field, v.Field2)
 		}
-		errors.Add(GenerateKey(v.Name), v.Message)
+		errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 	}
 }

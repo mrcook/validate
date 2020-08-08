@@ -8,6 +8,7 @@ import (
 )
 
 type StringIsPresent struct {
+	Object  string
 	Name    string
 	Field   string
 	Message string
@@ -24,5 +25,5 @@ func (v *StringIsPresent) IsValid(errors *validate.Errors) {
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
+	errors.Add(GenerateObjectKey(v.Object, v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
 }

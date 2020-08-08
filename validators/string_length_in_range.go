@@ -8,6 +8,7 @@ import (
 )
 
 type StringLengthInRange struct {
+	Object  string
 	Name    string
 	Field   string
 	Min     int
@@ -26,6 +27,6 @@ func (v *StringLengthInRange) IsValid(errors *validate.Errors) {
 		v.Message = fmt.Sprintf("%s not in range(%d, %d)", v.Name, v.Min, v.Max)
 	}
 	if !(strLength >= v.Min && strLength <= v.Max) {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		errors.Add(GenerateObjectKey(v.Object, v.Name), v.Message)
 	}
 }

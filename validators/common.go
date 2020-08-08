@@ -1,6 +1,8 @@
 package validators
 
 import (
+	"fmt"
+
 	"github.com/gobuffalo/flect"
 )
 
@@ -12,4 +14,19 @@ func GenerateKey(s string) string {
 		return key
 	}
 	return flect.Underscore(s)
+}
+
+func GenerateObjectKey(o, k string) string {
+	key := CustomKeys[k]
+	if key != "" {
+		return key
+	}
+
+	k = flect.Underscore(k)
+
+	if o != "" {
+		k = fmt.Sprintf("%s.%s", o, k)
+	}
+
+	return k
 }

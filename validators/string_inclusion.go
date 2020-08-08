@@ -8,6 +8,7 @@ import (
 )
 
 type StringInclusion struct {
+	Object  string
 	Name    string
 	Field   string
 	List    []string
@@ -29,6 +30,6 @@ func (v *StringInclusion) IsValid(errors *validate.Errors) {
 			return
 		}
 
-		errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s is not in the list [%s].", v.Name, strings.Join(v.List, ", ")))
+		errors.Add(GenerateObjectKey(v.Object, v.Name), fmt.Sprintf("%s is not in the list [%s].", v.Name, strings.Join(v.List, ", ")))
 	}
 }

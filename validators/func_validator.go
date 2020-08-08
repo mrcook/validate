@@ -8,6 +8,7 @@ import (
 )
 
 type FuncValidator struct {
+	Object  string
 	Fn      func() bool
 	Field   string
 	Name    string
@@ -20,6 +21,6 @@ func (f *FuncValidator) IsValid(verrs *validate.Errors) {
 		f.Name = f.Field
 	}
 	if !f.Fn() {
-		verrs.Add(GenerateKey(f.Name), fmt.Sprintf(f.Message, f.Field))
+		verrs.Add(GenerateObjectKey(f.Object, f.Name), fmt.Sprintf(f.Message, f.Field))
 	}
 }

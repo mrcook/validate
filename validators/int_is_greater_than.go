@@ -7,6 +7,7 @@ import (
 )
 
 type IntIsGreaterThan struct {
+	Object   string
 	Name     string
 	Field    int
 	Compared int
@@ -24,5 +25,5 @@ func (v *IntIsGreaterThan) IsValid(errors *validate.Errors) {
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%d is not greater than %d.", v.Field, v.Compared))
+	errors.Add(GenerateObjectKey(v.Object, v.Name), fmt.Sprintf("%d is not greater than %d.", v.Field, v.Compared))
 }

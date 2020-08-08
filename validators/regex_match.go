@@ -9,6 +9,7 @@ import (
 
 // RegexMatch specifies the properties needed by the validation.
 type RegexMatch struct {
+	Object  string
 	Name    string
 	Field   string
 	Expr    string
@@ -27,5 +28,5 @@ func (v *RegexMatch) IsValid(errors *validate.Errors) {
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s does not match the expected format.", v.Name))
+	errors.Add(GenerateObjectKey(v.Object, v.Name), fmt.Sprintf("%s does not match the expected format.", v.Name))
 }

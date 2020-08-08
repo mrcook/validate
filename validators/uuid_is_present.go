@@ -9,6 +9,7 @@ import (
 )
 
 type UUIDIsPresent struct {
+	Object  string
 	Name    string
 	Field   uuid.UUID
 	Message string
@@ -26,5 +27,5 @@ func (v *UUIDIsPresent) IsValid(errors *validate.Errors) {
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
+	errors.Add(GenerateObjectKey(v.Object, v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
 }
